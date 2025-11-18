@@ -1,4 +1,4 @@
-# Get_Next_Line
+# get_next_line
 
 A function in C for reading a line from a file descriptor, useful for parsing data from streams or files with dynamic content.
 
