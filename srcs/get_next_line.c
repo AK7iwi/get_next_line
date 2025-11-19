@@ -12,74 +12,57 @@
 
 #include "get_next_line.h"
 
-int	ft_lignefin(char *buf)
+char	*extract_line(char *line_buffer, char *buf)
 {
-	size_t		i;
-	size_t		j;
-
-	i = 0;
-	j = 0;
-	while (buf[i])
-	{
-		if (buf[i] == '\n')
-			j = 1;
-		i++;
-	}
-	return (j);
-}
-
-char	*ft_stock(char *stock, char *buf)
-{
+	char			*line;
 	size_t			i;
 	size_t			j;
-	char			*rest;
 
 	i = 0;
 	j = 0;
-	rest = malloc(sizeof(char) * (ft_strlen(stock) + 1));
-	if (!rest)
+	while (line_buffer[i] && line_buffer[i] != '\n')
+		i++;
+	if (line_buffer[i] == '\n')
+		i++;
+	line = malloc(sizeof(char) * (i + 1));
+	if (!line)
 		return (NULL);
-	while (stock[i] && stock[i] != '\n')
-		i++;
-	if (stock[i] == '\n')
-		i++;
-	while (stock[j] && j < i)
+	while (line_buffer[j] && j < i)
 	{
-		rest[j] = stock[j];
+		line[j] = line_buffer[j];
 		j++;
 	}
-	rest[j] = '\0';
+	line[j] = '\0';
 	j = 0;
-	while (buf[j] && stock[i])
-		buf[j++] = stock[i++];
+	while (line_buffer[i] && j < BUFFER_SIZE)
+		buf[j++] = line_buffer[i++];
 	buf[j] = '\0';
-	return (rest);
+	return (line);
 }
 
 char	*get_next_line(int fd)
 {
-	int				ret;
-	char			*stock;
-	char			*lignef;
 	static char		buf[BUFFER_SIZE + 1];
+	char			*line;
+	char			*line_buffer;
+	int				ret;
 
 	if (fd < 0 || fd > 1024 || BUFFER_SIZE <= 0)
 		return (NULL);
-	stock = NULL;
-	stock = ft_strjoin(stock, buf);
-	if (!stock)
-		return (free(stock), NULL);
+	line_buffer = ft_strdup(buf);
+	if (!line_buffer)
+		return (NULL);
 	ret = 1;
-	while (!ft_lignefin(buf) && ret)
+	while (!is_end_line(buf) && ret)
 	{
 		ret = read(fd, buf, BUFFER_SIZE);
-		if (ret == -1)
-			return (free(stock), NULL);
+		if (ret == -1 || (!ret && !line_buffer[0]))
+			return (free(line_buffer), NULL);
 		buf[ret] = '\0';
-		if (!ret && !stock[0])
-			return (free(stock), NULL);
-		stock = ft_strjoin(stock, buf);
+		line_buffer = ft_strjoin(line_buffer, buf);
+		if (!line_buffer)
+			return (NULL);
 	}
-	lignef = ft_stock(stock, buf);
-	return (free(stock), lignef);
+	line = extract_line(line_buffer, buf);
+	return (free(line_buffer), line);
 }

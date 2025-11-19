@@ -13,23 +13,33 @@
 #ifndef GET_NEXT_LINE_H
 # define GET_NEXT_LINE_H
 # ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 42
+#  define BUFFER_SIZE 100
 # endif
+
+//**********************************************//
+//					INCLUDES					//
+//**********************************************//
 
 # include <unistd.h>
 # include <stdio.h>
 # include <stdlib.h>
+# include <stdbool.h>
 # include <fcntl.h>
 
-/* Srcs */
+//**********************************************//
+//					GET_NEXT_LINE   			//
+//**********************************************//
 
+char	*extract_line(char *line_buffer, char *buf);
 char	*get_next_line(int fd);
-char	*ft_stock(char *stock, char *buf);
-int		ft_lignefin(char *buf);
 
-/* Utils */
+//**********************************************//
+//					UTILS   					//
+//**********************************************//
 
-size_t	ft_strlen(char *s);
+bool	is_end_line(char *buf);
+size_t	ft_strlen(char *buf);
 char	*ft_strjoin(char *s1, char *s2);
+char	*ft_strdup(char *s);
 
 #endif 

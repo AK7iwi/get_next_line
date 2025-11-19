@@ -4,7 +4,7 @@ A function in C for reading a line from a file descriptor, useful for parsing da
 
 ## Overview
 
-Get_Next_Line is a versatile function that reads a line from a file descriptor and dynamically allocates memory for the line. It is particularly useful for parsing data from streams or files with varying line lengths.
+get_next_line is a versatile function that reads a line from a file descriptor and dynamically allocates memory for the line. It is particularly useful for parsing data from streams or files with varying line lengths.
 
 ## Usage
 
@@ -13,7 +13,9 @@ Include the `get_next_line.h` header in your project and compile with the provid
 ```c
 #include "get_next_line.h"
 
-/* Flags to use : -Wall -Wextra -Werror -I./includes/ */
+/* To test: cc -Wall -Wextra -Werror -I includes */
+/* srcs/main.c srcs/get_next_line.c */
+/* srcs/utils/get_next_line_utils.c */
 
 int	main(void)
 {
@@ -35,6 +37,5 @@ int	main(void)
 ```
 
 ## Subject
-
 
 [gnl.en.subject.pdf](https://github.com/AK7iwi/Get_next_line/files/14182842/gnl.en.subject.pdf)

@@ -12,7 +12,9 @@
 
 #include "get_next_line.h"
 
-/* Flags to use : -Wall -Wextra -Werror -I./includes/ */
+/* To test: cc -Wall -Wextra -Werror -I includes */
+/* srcs/main.c srcs/get_next_line.c */
+/* srcs/utils/utils.c */
 
 int	main(void)
 {
@@ -27,7 +29,6 @@ int	main(void)
 		free(str);
 		str = get_next_line(fd);
 	}
-	free (str);
 	close(fd);
 	return (0);
 }
