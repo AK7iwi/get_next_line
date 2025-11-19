@@ -15,7 +15,7 @@ Include the `get_next_line.h` header in your project and compile with the provid
 
 /* To test: cc -Wall -Wextra -Werror -I includes */
 /* srcs/main.c srcs/get_next_line.c */
-/* srcs/utils/get_next_line_utils.c */
+/* srcs/utils/utils.c */
 
 int	main(void)
 {
@@ -30,7 +30,6 @@ int	main(void)
 		free(str);
 		str = get_next_line(fd);
 	}
-	free (str);
 	close(fd);
 	return (0);
 }
