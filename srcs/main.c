@@ -28,8 +28,6 @@ int	main(void)
 		printf("%s", str);
 		free(str);
 		str = get_next_line(fd);
-		if (!str)
-			return (close(fd), 1);
 	}
 	close(fd);
 	return (0);
